@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+echo "go away"
+exit 128
