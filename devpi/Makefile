@@ -8,7 +8,10 @@ build:
 freeze:
 	cp base-requirements.txt requirements.txt
 	${MAKE} build
-	docker run -t ${DOCKER_IMAGE}:${DOCKER_TAG} pip freeze > requirements.txt
+	docker run -t --entrypoint "" ${DOCKER_IMAGE}:${DOCKER_TAG} pip freeze > requirements.txt
 
 run:
-	docker run ${DOCKER_IMAGE}:${DOCKER_TAG}
+	docker run --rm -p 8989:8080 ${DOCKER_IMAGE}:${DOCKER_TAG}
+
+run-bash:
+	docker run --rm -ti --entrypoint bash ${DOCKER_IMAGE}:${DOCKER_TAG}
