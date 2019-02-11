@@ -14,7 +14,7 @@ freeze:
 
 .PHONY: run
 run:
-	docker run --rm -p 8989:8080 -v devpi:/home/devpi/data --name devpi ${DOCKER_IMAGE}:${DOCKER_TAG}
+	docker run -d --rm -p 8989:8080 -v devpi:/home/devpi/data --name devpi ${DOCKER_IMAGE}:${DOCKER_TAG}
 
 
 .PHONY: run-bash
