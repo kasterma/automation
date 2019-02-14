@@ -9,3 +9,8 @@ services:
       - "8400:8400"
       - "8500:8500"
       - "8600:53/udp"
+    volumes:
+      - consul:/consul/data
+
+volumes:
+  consul:
