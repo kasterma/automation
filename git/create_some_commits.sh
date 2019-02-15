@@ -7,9 +7,10 @@ fi
 
 filename=${2:-"file.txt"}
 message=${3:-"Commit message for commit IDX"}
+contents=${4:-"commit commit IDX"}
 
 for i in $(seq "$1"); do
-  echo "commit $i" >> "${filename}"
+  echo "${contents//IDX/$i}" >> "${filename}"
   git add ${filename}
   git commit -m "${message//IDX/$i}"
 done
