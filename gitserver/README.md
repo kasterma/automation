@@ -11,7 +11,6 @@ with `<repo_name>` e.g. gitrepo.git to execute this.
 
 1. the create_repo script is not yet working well inside the container.  This means that now create_local_repo.sh
    uses a docker exec command; would prefer that to be an ssh or git command.
-2. persistence with use of volume.
 
 # Notes
 
