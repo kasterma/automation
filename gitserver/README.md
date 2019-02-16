@@ -36,4 +36,10 @@ On localhost can now log in with:
     ssh-add rsatestkey
     
     git remote add local ssh://git@localhost:2222/home/git/test/
-     
+
+Setting up more 'flexibly' using .ssh/config
+
+    Host gitserver
+    User git
+    Hostname localhost
+    IdentityFile /Users/kasterma/projects/automation/gitserver/rsatestkey

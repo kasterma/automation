@@ -1,11 +1,15 @@
+DOCKER_IMAGE=kasterma/gitserver
+DOCKER_TAG=0.0.0
+
 .PHONY: build
 build:
-	docker build -t gitserver .
+	docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
 
 .PHONY: run
 run:  # run the docker, but with rm flag for development
 	-docker network create autom
-	docker run -d --rm --hostname gitserver --name gitserver -p2222:22 -e "PUBKEY=$(shell cat rsatestkey.pub)" --net autom gitserver
+	docker run -d --rm --hostname gitserver --name gitserver -p2222:22 -e "PUBKEY=$(shell cat rsatestkey.pub)" \
+		-v gitserver:/home/git/data --net autom ${DOCKER_IMAGE}:${DOCKER_TAG}
 
 .PHONY: stop
 stop:
