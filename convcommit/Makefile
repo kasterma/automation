@@ -7,3 +7,7 @@ venv:
 clean:
 	rm -rf venv
 	rm -rf convc.egg-info
+
+.PHONY: test
+test:
+	pytest tests
