@@ -8,7 +8,8 @@ build:
 .PHONY: run
 run:  # run the docker, but with rm flag for development
 	-docker network create autom
-	docker run -d --rm --hostname gitserver --name gitserver -p2222:22 -e "PUBKEY=$(shell cat rsatestkey.pub)" \
+	docker run -d  --restart unless-stopped  --hostname gitserver --name gitserver -p2222:22 \
+	    -e "PUBKEY=$(shell cat rsatestkey.pub)" \
 		-v gitserver:/home/git/data --net autom ${DOCKER_IMAGE}:${DOCKER_TAG}
 
 .PHONY: stop
