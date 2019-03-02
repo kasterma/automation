@@ -1,0 +1,21 @@
+# Live Schema Change
+
+In the article [SQL is No Excuse][1] there is a description of how to do live schema change for a SQL database.  Seemed like a good thing
+to work through and experience.
+
+## The Five Phases of a Live Schema Change
+
+Directly from [1].
+
+1. The running code read and writes the old schema, selecting just the fields that it needs from the table or view.
+2. Expand: The schema is modified by adding any new fields but not removing any old ones.  No code changes are made.  If
+   a rollback is needed, it's painless becuase the new fields are not being used.
+3. Code is modified to use the new schema fields and pushed into production.  If a rollback is needed it just reverts
+   to phase 2.  At this time any data conversion can be done while the system is live.
+4. Contract: Code that references the old, now unused, fields is removed and pushed into production.  If a rollback is
+   needed it just reverts to phase 3.
+5. Old, now unsed, fields are removed from the schema.  In the unlikely event that a rollbakc is needed at this point,
+   the database would simply revert to phase 4.
+
+
+[1]: https://queue.acm.org/detail.cfm?id=3300018      SQL is No Excuse to Avoid DevOps, Thomas A. Limoncelli 
