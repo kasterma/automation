@@ -1,0 +1,23 @@
+fsa1:
+   init: {init: 0.8, view: 0.15, click2: 0.05}
+   view: {view: 0.7, click: 0.2, click2: 0.05, done: 0.05}
+   click: {init: 0.7, view: 0.1, click: 0.1, click2: 0.05, done: 0.05}
+   click2: {done: 1}
+   done: {done: 1}
+
+fsa1_count: 5
+
+fsa1_birthrate: 0.01
+
+fsa2:
+   init: {init: 0.8, view: 0.15, click2: 0.05}
+   view: {view: 0.7, click: 0.2, click2: 0.05, done: 0.05}
+   click: {init: 0.7, view: 0.1, click: 0.1, click2: 0.05, done: 0.05}
+   click2: {done: 1}
+   done: {done: 1}
+
+fsa2_count: 2
+
+fsa2_birthrate: 0.01
+
+monitor_interval_seconds: 120
