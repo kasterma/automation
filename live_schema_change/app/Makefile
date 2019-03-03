@@ -8,3 +8,6 @@ generate:
 
 monitor:
 	python app.py monitor
+
+build:
+	docker build -t schema_app:0.0.0 .

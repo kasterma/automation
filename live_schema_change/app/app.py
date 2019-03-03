@@ -5,7 +5,7 @@ import time
 import click
 import numpy as np
 from config import config
-from db import metadata1, metadata2, views_1, click_1, click2_1, views_2, click_2, click2_2
+from db import metadata1, metadata2, view_1, click_1, click2_1, view_2, click_2, click2_2
 from fsa import FSA
 from sqlalchemy import create_engine, select, insert
 
@@ -58,7 +58,7 @@ def monitor_transactions(version):
     if version == 1:
         log.info("perform analysis without types")
         while True:
-            views = conn.execute(select([views_1]).where(views_1.timestamp > cutoff)).fetchall()
+            views = conn.execute(select([view_1]).where(view_1.timestamp > cutoff)).fetchall()
             clicks = conn.execute(select([click_1]).where(click_1.timestamp > cutoff)).fetchall()
             click2s = conn.execute(select([click2_1]).where(click2_1.timestamp > cutoff)).fetchall()
             log.info(click2s)
@@ -66,7 +66,7 @@ def monitor_transactions(version):
     else:
         log.info("perform analysis with types")
         while True:
-            views = conn.execute(select([views_2]).where(views_2.timestamp > cutoff)).fetchall()
+            views = conn.execute(select([view_2]).where(view_2.timestamp > cutoff)).fetchall()
             clicks = conn.execute(select([click_2]).where(click_2.timestamp > cutoff)).fetchall()
             click2s = conn.execute(select([click2_2]).where(click2_2.timestamp > cutoff)).fetchall()
             log.info(click2s)
