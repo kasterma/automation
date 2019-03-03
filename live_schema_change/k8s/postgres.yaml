@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pg
+  labels:
+    app: schema_change
+    component: pg
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: schema_change
+      component: pg
+  template:
+    metadata:
+      labels:
+        app: schema_change
+        component: pg
+    spec:
+      containers:
+      - name: pg
+        image: postgres:11.2
+        env:
+          - name: POSTGRES_PASSWORD
+            value: mysecretpassword

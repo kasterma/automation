@@ -11,3 +11,6 @@ monitor:
 
 build:
 	docker build -t schema_app:0.0.0 .
+
+build-mk:
+	eval $(minikube docker-env) ; docker build -t schema_app:0.0.0 .
