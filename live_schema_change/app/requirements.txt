@@ -3,3 +3,4 @@ alembic
 click
 pyyaml
 numpy
+psycopg2

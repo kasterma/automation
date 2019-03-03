@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: pg
+spec:
+  selector:
+    app: schema_change
+    component: pg
+  ports:
+  - protocol: TCP
+    port: 5432

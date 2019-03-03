@@ -21,3 +21,5 @@ fsa2_count: 2
 fsa2_birthrate: 0.01
 
 monitor_interval_seconds: 120
+
+db_connect: "postgresql://postgres:mysecretpassword@pg:5432"

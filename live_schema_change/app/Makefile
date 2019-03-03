@@ -1,3 +1,5 @@
+DOCKER_TAG=0.0.1
+
 .PHONY: setup generate monitor
 
 setup:
@@ -10,7 +12,7 @@ monitor:
 	python app.py monitor
 
 build:
-	docker build -t schema_app:0.0.0 .
+	docker build -t schema_app:${DOCKER_TAG} .
 
 build-mk:
-	eval $(minikube docker-env) ; docker build -t schema_app:0.0.0 .
+	eval $$(minikube docker-env) ; docker build -t schema_app:${DOCKER_TAG} .
