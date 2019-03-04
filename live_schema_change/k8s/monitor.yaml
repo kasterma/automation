@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: monitor
-          image: schema_app:0.0.2
+          image: schema_app:0.0.3
           command:
             - python
             - app.py

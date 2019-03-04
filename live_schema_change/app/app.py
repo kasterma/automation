@@ -23,13 +23,56 @@ def setup_database(version):
         metadata2.create_all(engine)
 
 
+def insert_v1(result, connection):
+    """Insert the version 1 FSA result into the db"""
+    log.debug(f"result {result}")
+    if result is None:
+        return
+    if result['event_type'] == 'view':
+        connection.execute(view_1.insert().values(id=result['id'],
+                                                  timestamp=time.monotonic()))
+    elif result['event_type'] == 'click':
+        connection.execute(click_1.insert().values(id=result['id'],
+                                                   timestamp=time.monotonic()))
+    elif result['event_type'] == 'click2':
+        connection.execute(click2_1.insert().values(id=result['id'],
+                                                    timestamp=time.monotonic()))
+    else:
+        log.error(f"Received unrecognized event_type in result {result}")
+
+
+def insert_v2(result, connection):
+    """Insert the version 1 FSA result into the db"""
+    log.debug(f"result {result}")
+    if result is None:
+        return
+    if result['event_type'] == 'view':
+        connection.execute(view_2.insert().values(id=result['id'],
+                                                  type=result['fsa_type'],
+                                                  timestamp=time.monotonic()))
+    elif result['event_type'] == 'click':
+        connection.execute(click_2.insert().values(id=result['id'],
+                                                   type=result['fsa_type'],
+                                                   timestamp=time.monotonic()))
+    elif result['event_type'] == 'click2':
+        connection.execute(click2_2.insert().values(id=result['id'],
+                                                    type=result['fsa_type'],
+                                                    timestamp=time.monotonic()))
+    else:
+        log.error(f"Received unrecognized event_type in result {result}")
+
+
 @click.command()
-def generate_transactions():
+@click.option("--version")
+def generate_transactions(version):
     fsas = []
+    insert_fn = insert_v1 if int(version) == 1 else insert_v2
+    engine = create_engine(config["db_connect"])
+    conn = engine.connect()
     for idx in range(config['fsa1_count']):
-        fsas.append(FSA(idx, lambda x: log.info(x), 1, config['fsa1']))
+        fsas.append(FSA(idx, lambda x: insert_fn(x, conn), 1, config['fsa1']))
     for idx in range(config['fsa2_count']):
-        fsas.append(FSA(config['fsa1_count'] + idx, lambda x: log.info(x), 1, config['fsa2']))
+        fsas.append(FSA(config['fsa1_count'] + idx, lambda x: insert_fn(x, conn), 1, config['fsa2']))
     idx = config['fsa1_count'] + config['fsa2_count']
     while len(fsas) > 0:
         fsa = random.choice(fsas)
@@ -39,11 +82,11 @@ def generate_transactions():
             fsas.remove(fsa)
         if random.uniform(0, 1) < config['fsa1_birthrate']:
             log.debug("new fsa1")
-            fsas.append(FSA(idx, lambda x: log.info(x), 1, config['fsa1']))
+            fsas.append(FSA(idx, lambda x: insert_fn(x, conn), 1, config['fsa1']))
             idx += 1
         if random.uniform(0, 1) < config['fsa2_birthrate']:
             log.debug("new fsa2")
-            fsas.append(FSA(idx, lambda x: log.info(x), 2, config['fsa2']))
+            fsas.append(FSA(idx, lambda x: insert_fn(x, conn), 2, config['fsa2']))
             idx += 1
         log.debug(f"counts {np.unique([f.fsa_type for f in fsas], return_counts=True)}")
 

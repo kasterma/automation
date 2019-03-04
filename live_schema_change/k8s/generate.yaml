@@ -19,8 +19,10 @@ spec:
     spec:
       containers:
         - name: generate
-          image: schema_app:0.0.2
+          image: schema_app:0.0.3
           command:
             - python
             - app.py
             - generate
+            - "--version"
+            - "1"

@@ -24,9 +24,9 @@ class FSA:
         self.state = 'init'
         self.transitions = transactions
         self.actions = {'init': lambda: None,
-                        'view': lambda: (self.fsa_id, self.fsa_type, 'view'),
-                        'click': lambda: (self.fsa_id, self.fsa_type, 'click'),
-                        'click2': lambda: (self.fsa_id, self.fsa_type, 'click2'),
+                        'view': lambda: {'id': self.fsa_id, 'fsa_type': self.fsa_type, 'event_type': 'view'},
+                        'click': lambda: {'id': self.fsa_id, 'fsa_type': self.fsa_type, 'event_type': 'click'},
+                        'click2': lambda: {'id': self.fsa_id, 'fsa_type': self.fsa_type, 'event_type': 'click2'},
                         'done': lambda: None}
         self.step_fn = compile_transitions_actions(self.transitions, self.actions)
 
