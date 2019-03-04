@@ -1,4 +1,4 @@
-DOCKER_TAG=0.0.1
+DOCKER_TAG=0.0.2
 
 .PHONY: setup generate monitor
 

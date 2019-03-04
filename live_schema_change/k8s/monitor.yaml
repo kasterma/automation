@@ -1,26 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app
+  name: monitor
   labels:
     app: schema_change
-    component: app
+    component: monitor
 spec:
   replicas: 2
   selector:
     matchLabels:
       app: schema_change
-      component: app
+      component: monitor
   template:
     metadata:
       labels:
         app: schema_change
-        component: app
+        component: monitor
     spec:
       containers:
-        - name: app
-          image: schema_app:0.0.0
+        - name: monitor
+          image: schema_app:0.0.2
           command:
             - python
             - app.py
-            - generate
+            - monitor
+            - "--version"
+            - "1"

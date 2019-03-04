@@ -58,17 +58,17 @@ def monitor_transactions(version):
     if version == 1:
         log.info("perform analysis without types")
         while True:
-            views = conn.execute(select([view_1]).where(view_1.timestamp > cutoff)).fetchall()
-            clicks = conn.execute(select([click_1]).where(click_1.timestamp > cutoff)).fetchall()
-            click2s = conn.execute(select([click2_1]).where(click2_1.timestamp > cutoff)).fetchall()
+            views = conn.execute(select([view_1]).where(view_1.c.timestamp > cutoff)).fetchall()
+            clicks = conn.execute(select([click_1]).where(click_1.c.timestamp > cutoff)).fetchall()
+            click2s = conn.execute(select([click2_1]).where(click2_1.c.timestamp > cutoff)).fetchall()
             log.info(click2s)
             time.sleep(1)
     else:
         log.info("perform analysis with types")
         while True:
-            views = conn.execute(select([view_2]).where(view_2.timestamp > cutoff)).fetchall()
-            clicks = conn.execute(select([click_2]).where(click_2.timestamp > cutoff)).fetchall()
-            click2s = conn.execute(select([click2_2]).where(click2_2.timestamp > cutoff)).fetchall()
+            views = conn.execute(select([view_2]).where(view_2.c.timestamp > cutoff)).fetchall()
+            clicks = conn.execute(select([click_2]).where(click_2.c.timestamp > cutoff)).fetchall()
+            click2s = conn.execute(select([click2_2]).where(click2_2.c.timestamp > cutoff)).fetchall()
             log.info(click2s)
             time.sleep(1)
 

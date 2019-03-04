@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: generate
+  labels:
+    app: schema_change
+    component: generate
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: schema_change
+      component: generate
+  template:
+    metadata:
+      labels:
+        app: schema_change
+        component: generate
+    spec:
+      containers:
+        - name: generate
+          image: schema_app:0.0.2
+          command:
+            - python
+            - app.py
+            - generate

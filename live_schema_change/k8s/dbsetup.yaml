@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
       - name: dbsetup
-        image: schema_app:0.0.1
+        image: schema_app:0.0.2
         command:
           - python
           - app.py

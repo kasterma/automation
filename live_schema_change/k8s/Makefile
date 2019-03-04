@@ -1,5 +1,8 @@
-app:
-	kubectl apply --record -f app.yaml
+monitor:
+	kubectl apply --record -f monitor.yaml
+
+generate:
+	kubectl apply --record -f generate.yaml
 
 setup:
 	kubectl apply --record -f dbsetup.yaml
