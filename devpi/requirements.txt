@@ -30,7 +30,7 @@ pyramid-chameleon==0.3
 python-dateutil==2.7.5
 readme-renderer==24.0
 repoze.lru==0.7
-requests==2.21.0
+requests==2.31.0
 ruamel.yaml==0.15.82
 six==1.12.0
 soupsieve==1.6.1
